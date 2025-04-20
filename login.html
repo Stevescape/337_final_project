@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> [Placeholder Name] | Login</title> 
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --orange: #FF8811;
+                --yellow: #F4D06F;
+                --cream: #FFF8F0;
+                --teal: #9DD9D2;
+                --deep-purple: #392F5A;
+                --rich-purple: #3D315B;
+                --slate-blue: #444B6E;
+            }
+
+            body {
+                margin: 0;
+                font-family: 'Montserrat', sans-serif;
+                background-color: var(--cream);
+                color: var(--deep-purple);
+            }
+
+            header {
+                background-color: var(--slate-blue);
+                color: var(--cream);
+                padding: 1rem 2rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav a {
+                color: var(--cream);
+                text-decoration: none;
+                margin-left: 1rem;
+                font-weight: bold;
+            }
+
+            /* Products Dropdown */
+            .prod-dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .prod-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                background-color: var(--cream);
+                border: 1px solid var(--slate-blue);
+                border-radius: 4px;
+                position: absolute;
+                min-width: 160px;
+                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+                z-index: 1;
+            }
+
+            .prod-content a {
+                color: var(--deep-purple);
+                padding: 0.5rem 1rem;
+                text-decoration: none;
+                display: block;
+            }
+
+            .prod-content a:hover {
+                background-color: var(--teal);
+                color: var(--cream);
+            }
+
+            .prod-dropdown:hover .prod-content {
+                max-height: 500px;
+            }
+
+            /* Login Fields */ 
+            .login-fields {
+
+            }
+
+            /* Footer */
+            footer {
+                position: fixed;
+                bottom: 0px;
+                width: 100%;
+                background-color: var(--deep-purple);
+                color: var(--cream);
+                text-align: center;
+                padding: 1rem;
+                margin-top: 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header & Nav Bar -->
+        <header>
+            <h1> [Placeholder Name]</h1>
+            <nav>
+                <a href = '#'>Home</a>
+                <div class = 'prod-dropdown'>
+                    <a href = '#'>Products</a>
+                    <div class = 'prod-content'>
+                        <a href = '#'>[Placeholder]</a>
+                        <a href = '#'>[Placeholder]</a>
+                        <a href = '#'>[Placeholder]</a>
+                        <a href = '#'>[Placeholder]</a>
+                    </div>
+                </div>
+
+                <a href = '#'>Login</a>
+                <a href = '#'>Create Account</a>
+                <a href = '#'>About Us</a>
+            </nav>
+        </header>
+        <h1> Login </h1>
+        <div class = 'login-fields'>
+            <input type = 'email'>
+        </div>
+
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 [Placeholder name]</p>
+        </footer>
+    </body>
+</html>

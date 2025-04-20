@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> [Placeholder Name] | Home </title> 
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --orange: #FF8811;
+                --yellow: #F4D06F;
+                --cream: #FFF8F0;
+                --teal: #9DD9D2;
+                --deep-purple: #392F5A;
+                --rich-purple: #3D315B;
+                --slate-blue: #444B6E;
+            }
+
+            html, body {
+                margin: 0;
+                height: 100%;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                font-family: 'Montserrat', sans-serif;
+                background-color: var(--cream);
+                color: var(--deep-purple);
+            }
+
+            .page-wrapper {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            header {
+                background-color: var(--slate-blue);
+                color: var(--cream);
+                padding: 1rem 2rem;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav a {
+                color: var(--cream);
+                text-decoration: none;
+                margin-left: 1rem;
+                font-weight: bold;
+            }
+
+            /* Products Dropdown */
+            .prod-dropdown {
+                position: relative;
+                display: inline-block;
+            }
+
+            .prod-content {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                background-color: var(--cream);
+                border: 1px solid var(--slate-blue);
+                border-radius: 4px;
+                position: absolute;
+                min-width: 160px;
+                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+                z-index: 1;
+            }
+
+            .prod-content a {
+                color: var(--deep-purple);
+                padding: 0.5rem 1rem;
+                text-decoration: none;
+                display: block;
+            }
+
+            .prod-content a:hover {
+                background-color: var(--teal);
+                color: var(--cream);
+            }
+
+            .prod-dropdown:hover .prod-content {
+                max-height: 500px;
+            }
+
+            /* Banner */
+            .banner {
+                background-color: var(--teal);
+                padding: 3rem 2rem;
+                text-align: center;
+            }
+            
+            .banner h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .banner p {
+                font-size: 1.5rem;
+                color: var(--rich-purple);
+            }
+            
+            /* Product Category Grid */
+            .product-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                flex-grow: 1;
+                padding: 2rem;
+                padding-bottom: 6rem;
+            }
+
+            .product-type {
+                background-color: var(--cream);
+                border: 1px solid var(--slate-blue);
+                border-radius: 8px;
+                padding: 1rem;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+
+            .product-type h3 {
+                margin: 0.8rem 0 0.3rem;
+            }
+
+            .btn {
+                display: inline-block;
+                background-color: var(--orange);
+                color: var(--cream);
+                padding: 0.5rem 1rem;
+                border: none;
+                border-radius: 4px;
+                text-decoration: none;
+                font-weight: bold;
+                margin-top: 0.5rem;
+            }
+
+            .btn:hover {
+                background-color: var(--yellow);
+                color: var(--deep-purple)
+            }
+
+            /* Cart Sidebar */
+            .cart-sidebar {
+                position: fixed;
+                top: 50%;
+                right: -300px;
+                transform: translateY(-50%);
+                display: flex;
+                align-items: center;
+                z-index: 1000;
+                transition: right 0.3s ease;;
+            }
+
+            .cart-tab {
+                width: 60px;
+                height: 120px;
+                background-color: var(--orange);
+                color: var(--cream);
+                padding: 1rem;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+                cursor: pointer;
+                font-size: 1.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                writing-mode: vertical-rl;
+                /*
+                transition: background 0.5s;
+                z-index: 2;
+                height: 100vh;
+                */
+            }
+
+            .cart-tab:hover {
+                background-color: var(--yellow);
+                color: var(--deep-purple)
+            }
+
+            .cart-content {
+                background-color: var(--cream);
+                color: var(--deep-purple);
+                width: 250px;
+                padding: 1rem;
+                padding-bottom: 2rem; /* Add extra padding at the bottom */
+                border-left: 2px solid var(--slate-blue);
+                box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+                /*
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+                */
+                height: 100vh;
+                overflow-y: auto;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .cart-sidebar:hover {
+                right: 0;
+            }
+
+
+            /* Footer */
+            footer {
+                position: fixed;
+                bottom: 0px;
+                width: 100%;
+                background-color: var(--deep-purple);
+                color: var(--cream);
+                text-align: center;
+                padding: 1rem;
+                margin-top: 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class = "page-wrapper">
+            <!-- Header & Nav Bar -->
+            <header>
+                <h1> [Placeholder Name]</h1>
+                <nav>
+                    <a href = '#'>Home</a>
+                    <div class = 'prod-dropdown'>
+                        <a href = '#'>Products</a>
+                        <div class = 'prod-content'>
+                            <a href = '#'>[Placeholder]</a>
+                            <a href = '#'>[Placeholder]</a>
+                            <a href = '#'>[Placeholder]</a>
+                            <a href = '#'>[Placeholder]</a>
+                        </div>
+                    </div>
+
+                    <a href = '#'>Login</a>
+                    <a href = '#'>Create Account</a>
+                    <a href = '#'>About Us</a>
+                </nav>
+            </header>
+            <!-- Welcome Banner -->
+            <div class = 'banner'>
+                <h1>Welcome to [Placeholder Name]</h1>
+                <p>Your place for all your art supply needs!</p>
+            </div>
+
+            <!-- Grid of Products (Product Categories) -->
+            <div class = 'product-grid'>
+                <div class = 'product-type'> 
+                    <h3>[Placeholder]</h3>
+                    <a href = '#' class = "btn">View</a>
+                </div>
+
+                <div class = 'product-type'> 
+                    <h3>[Placeholder]</h3>
+                    <a href = '#' class = "btn">View</a>
+                </div>
+
+                <div class = 'product-type'> 
+                    <h3>[Placeholder]</h3>
+                    <a href = '#' class = "btn">View</a>
+                </div>
+            </div>
+
+            <!-- Pop-up side bar checkout -->
+            <div class = 'cart-sidebar'>
+                <div class = 'cart-tab'>
+                    <h3>Cart</h3>
+                </div>
+                <div class = 'cart-content'>
+                    <div>
+                        <h3> Your Cart </h3>
+                        <p> Empty </p>
+                    </div>
+
+                    <a href = '#' class = 'btn'>Go to Checkout</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 [Placeholder name]</p>
+        </footer>
+    </body>
+</html>
