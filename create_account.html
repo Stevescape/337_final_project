@@ -59,6 +59,7 @@
             .prod-content a {
                 color: var(--deep-purple);
                 padding: 8px 16px;
+                text-decoration: none;
                 display: block;
             }
 
@@ -72,7 +73,7 @@
             }
 
             /* Login Fields */ 
-            .login-fields {
+            .create-acc-fields {
                 background-color: var(--teal);
                 border: 1px solid var(--slate-blue);
                 width: 30%;
@@ -83,7 +84,7 @@
                 margin: 0 auto;
             }
 
-            .login-fields-style {
+            .create-acc-style {
                 padding: 10px;
                 margin: 5px;
                 background-color: var(--cream);
@@ -93,7 +94,7 @@
                 font-family: 'Montserrat', sans-serif;
             }
 
-            .login-fields button {
+            .create-acc-fields button {
                 display: inline-block;
                 background-color: var(--orange);
                 color: var(--cream);
@@ -105,7 +106,7 @@
                 margin-top: 8px;                
             }
 
-            .login-fields button:hover {
+            .create-acc-fields button:hover {
                 background-color: var(--yellow);
                 color: var(--deep-purple)
             }
@@ -144,11 +145,13 @@
                 <a href = '#'>About Us</a>
             </nav>
         </header>
-        <h1 style = 'text-align: center;'> Login </h1>
-        <div class = 'login-fields'>
+        <h1 style = 'text-align: center;'> Create Account </h1>
+        <div class = 'create-acc-fields'>
+            <input type = 'text' placeholder = 'Full Name' class = 'create-acc-style'> <br>
             <input type = 'email' placeholder = 'Email' class = 'login-fields-style'> <br>
             <input type = 'text' placeholder = 'Password' class = 'login-fields-style'> <br>
-            <button type="submit">Sign In</button>
+            <input type = 'text' placeholder = 'Address' class = 'login-fields-style'> <br>
+            <button type="submit">Create Account</button>
         </div>
 
 
