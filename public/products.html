@@ -209,12 +209,15 @@
                 margin-top: 32px;
             }
         </style>
+        <script src="products.js"></script>
     </head>
-    <body>
+    <body onload="load_products()">
         <div class = "page-wrapper">
             <!-- Header & Nav Bar -->
             <header>
                 <h1> [Placeholder Name]</h1>
+                <button onclick="add_product({name:'Pencils', price:12.99})">TEST: add product</button>
+                <button onclick="delete_product({name:'Pencils', price:12.99})">TEST: delete product</button>
                 <nav>
                     <a onclick = "sendReq('home')">Home</a>
                     <div class = 'prod-dropdown'>
@@ -237,27 +240,7 @@
             <div class = 'product-grid'>
                 <div class = 'product-type'> 
                     <h3>[Placeholder]</h3>
-                    
-                    <button class = "btn">-</button> 
-                    <h4>[num]</h4> 
-                    <button class = "btn">+</button>
-                    
-                </div>
-
-                <div class = 'product-type'> 
-                    <h3>[Placeholder]</h3>
-
-                    <button class = "btn">-</button> 
-                    <h4>[num]</h4> 
-                    <button class = "btn">+</button>
-                </div>
-
-                <div class = 'product-type'> 
-                    <h3>[Placeholder]</h3>
-
-                    <button class = "btn">-</button> 
-                    <h4>[num]</h4> 
-                    <button class = "btn">+</button>
+                    <a href = '#' class = "btn">View</a>
                 </div>
             </div>
 
