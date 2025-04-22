@@ -47,56 +47,16 @@
                 font-weight: bold;
             }
 
-            /* Products Dropdown */
-            .prod-dropdown {
-                position: relative;
-                display: inline-block;
-            }
-
-            .prod-content {
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-                background-color: var(--cream);
-                border: 1px solid var(--slate-blue);
-                border-radius: 4px;
-                position: absolute;
-                min-width: 160px;
-                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-                z-index: 1;
-            }
-
-            .prod-content a {
-                color: var(--deep-purple);
-                padding: 8px 16px;
-                text-decoration: none;
-                display: block;
-            }
-
-            .prod-content a:hover {
-                background-color: var(--teal);
-                color: var(--cream);
-            }
-
-            .prod-dropdown:hover .prod-content {
-                max-height: 500px;
-            }
-
             /* Banner */
             .banner {
                 background-color: var(--teal);
-                padding: 48px 32px;
+                padding: 12px 8px;
                 text-align: center;
             }
             
             .banner h1 {
-                font-size: 40px;
-                margin-bottom: 8px;
-            }
-
-            .banner p {
-                font-size: 24px;
-                color: var(--rich-purple);
+                font-size: 32px;
+                margin-bottom: 12px;
             }
             
             /* Product Category Grid */
@@ -110,7 +70,7 @@
             }
 
             .product-type {
-                background-color: var(--cream);
+                background-color: white;
                 border: 1px solid var(--slate-blue);
                 border-radius: 8px;
                 padding: 16px;
@@ -224,31 +184,18 @@
                 </nav>
             </header>
 
+            <!-- Store Banner -->
+            <div class = 'banner'>
+                <h1>Store</h1>
+            </div>
+
             <!-- Grid of Products (Product Categories) -->
             <div class = 'product-grid'>
                 <div class = 'product-type'> 
                     <h3>[Placeholder]</h3>
                     
-                    <button class = "btn">-</button> 
-                    <h4>[num]</h4> 
-                    <button class = "btn">+</button>
+                    <button class = "btn">Add to Cart</button> 
                     
-                </div>
-
-                <div class = 'product-type'> 
-                    <h3>[Placeholder]</h3>
-
-                    <button class = "btn">-</button> 
-                    <h4>[num]</h4> 
-                    <button class = "btn">+</button>
-                </div>
-
-                <div class = 'product-type'> 
-                    <h3>[Placeholder]</h3>
-
-                    <button class = "btn">-</button> 
-                    <h4>[num]</h4> 
-                    <button class = "btn">+</button>
                 </div>
             </div>
 

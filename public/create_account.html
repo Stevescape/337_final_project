@@ -37,41 +37,6 @@
                 font-weight: bold;
             }
 
-            /* Products Dropdown */
-            .prod-dropdown {
-                position: relative;
-                display: inline-block;
-            }
-
-            .prod-content {
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-                background-color: var(--cream);
-                border: 1px solid var(--slate-blue);
-                border-radius: 4px;
-                position: absolute;
-                min-width: 160px;
-                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-                z-index: 1;
-            }
-
-            .prod-content a {
-                color: var(--deep-purple);
-                padding: 8px 16px;
-                text-decoration: none;
-                display: block;
-            }
-
-            .prod-content a:hover {
-                background-color: var(--teal);
-                color: var(--cream);
-            }
-
-            .prod-dropdown:hover .prod-content {
-                max-height: 500px;
-            }
-
             /* Login Fields */ 
             .create-acc-fields {
                 background-color: var(--teal);
@@ -87,7 +52,7 @@
             .create-acc-style {
                 padding: 10px;
                 margin: 5px;
-                background-color: var(--cream);
+                background-color: white;
                 border: black 1px solid;
                 border-radius: 2px;
                 box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -137,13 +102,13 @@
             </nav>
         </header>
         <h1 style = 'text-align: center;'> Create Account </h1>
-        <div class = 'create-acc-fields'>
+        <form class = 'create-acc-fields'>
             <input type = 'text' placeholder = 'Full Name' class = 'create-acc-style'> <br>
             <input type = 'email' placeholder = 'Email' class = 'create-acc-style'> <br>
             <input type = 'text' placeholder = 'Password' class = 'create-acc-style'> <br>
             <input type = 'text' placeholder = 'Address' class = 'create-acc-style'> <br>
             <button type="submit">Create Account</button>
-        </div>
+        </form>
 
 
         <!-- Footer -->
