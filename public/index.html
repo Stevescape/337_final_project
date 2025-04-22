@@ -47,41 +47,6 @@
                 font-weight: bold;
             }
 
-            /* Products Dropdown */
-            .prod-dropdown {
-                position: relative;
-                display: inline-block;
-            }
-
-            .prod-content {
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-                background-color: var(--cream);
-                border: 1px solid var(--slate-blue);
-                border-radius: 4px;
-                position: absolute;
-                min-width: 160px;
-                box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-                z-index: 1;
-            }
-
-            .prod-content a {
-                color: var(--deep-purple);
-                padding: 8px 16px;
-                text-decoration: none;
-                display: block;
-            }
-
-            .prod-content a:hover {
-                background-color: var(--teal);
-                color: var(--cream);
-            }
-
-            .prod-dropdown:hover .prod-content {
-                max-height: 500px;
-            }
-
             /* Banner */
             .banner {
                 background-color: var(--teal);
@@ -212,9 +177,9 @@
             <header>
                 <h1> [Placeholder Name]</h1>
                 <nav>
-                    <a href = '#'>Home</a>
+                    <a onclick = "sendReq('home')">Home</a>
                     <div class = 'prod-dropdown'>
-                        <a href = '#'>Products</a>
+                        <a onclick = "sendReq('products')">Products</a>
                         <div class = 'prod-content'>
                             <a href = '#'>[Placeholder]</a>
                             <a href = '#'>[Placeholder]</a>
@@ -223,9 +188,9 @@
                         </div>
                     </div>
 
-                    <a href = '#'>Login</a>
-                    <a href = '#'>Create Account</a>
-                    <a href = '#'>About Us</a>
+                    <a onclick = "sendReq('login')">Login</a>
+                    <a onclick = "sendReq('create_account')">Create Account</a>
+                    <a onclick = "sendReq('about')">About Us</a>
                 </nav>
             </header>
             <!-- Welcome Banner -->
