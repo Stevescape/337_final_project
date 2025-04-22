@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const app = express();
 const {MongoClient} = require("mongodb")
-const db_url = "temp"
+const db_url = process.env.API_KEY
 var client = new MongoClient(db_url)
 client.connect()
 
