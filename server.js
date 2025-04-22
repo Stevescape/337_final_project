@@ -6,7 +6,7 @@ const app = express();
 const rootFolder = path.join(__dirname, 'public');
 
 app.get('/home', function(req, res){
-    res.sendFile(path.join(publicFolder, 'index.html'))
+    res.sendFile(path.join(rootFolder, 'index.html'))
 })
 
 app.listen(3000, function(){
