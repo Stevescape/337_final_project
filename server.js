@@ -2,8 +2,35 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const app = express();
+const {MongoClient} = require("mongodb")
+const db_url = "temp"
+var client = new MongoClient(db_url)
+client.connect()
 
 const rootFolder = path.join(__dirname, 'public/');
+
+async function insertOneProduct(product) {
+    var col = client.db("store").collection("products")
+    await col.insertOne(product)
+    var result = col.find({})
+    result = await result.toArray()
+    return result
+}
+
+async function DBgetProducts() {
+    var col = client.db("store").collection("products")
+    var result = col.find({})
+    result = await result.toArray()
+    return result
+}
+
+async function deleteOneProduct(product) { 
+    var col = client.db("store").collection("products")
+    await col.deleteOne(product)
+    var result = col.find({})
+    result = await result.toArray()
+    return result
+}
 
 app.get('/home', function(req, res){
     res.sendFile(path.join(rootFolder, 'index.html'))
@@ -11,6 +38,30 @@ app.get('/home', function(req, res){
 
 app.get('/products', function(req, res){
     res.sendFile(path.join(rootFolder, 'products.html'))
+})
+
+app.get('/products.js', function(req, res) {
+    res.sendFile(path.join(rootFolder, 'products.js'))
+})
+
+app.get('/get_products', function(req, res){
+    DBgetProducts()
+    .then((products) => {
+        res.send(products)
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+})
+
+app.post('/add_product', express.json(),function(req, res) {
+    var product = {name:req.body.name, price:req.body.price}
+    res.send(insertOneProduct(product)) 
+})
+
+app.post('/delete_product', express.json(),function(req, res) {
+    var product = {name:req.body.name, price:req.body.price}
+    res.send(deleteOneProduct(product))
 })
 
 app.get('/login', function(req, res){
@@ -26,4 +77,9 @@ app.get('/about', function(req, res){
 })
 app.listen(3000, function(){
     console.log('Server Running at localhost:3000')
+})
+
+process.on("SIGINT", async () => {
+    await client.close()
+    process.exit()
 })
