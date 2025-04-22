@@ -32,11 +32,6 @@ async function deleteOneProduct(product) {
     return result
 }
 
-function shutdownServer() {
-    client.close()
-    console.log("Closed Successfully")
-}
-
 app.get('/home', function(req, res){
     res.sendFile(path.join(rootFolder, 'index.html'))
 })
