@@ -53,6 +53,7 @@
                 background-color: var(--teal);
                 padding: 12px 8px;
                 text-align: center;
+                margin-bottom: 20px;
             }
             
             .banner h1 {
@@ -88,7 +89,8 @@
             }
 
             .btn {
-                
+                display: inline-block;
+                text-align: center;
                 background-color: var(--orange);
                 color: var(--cream);
                 padding: 8px 16px;
@@ -104,6 +106,10 @@
                 color: var(--deep-purple)
             }
 
+            .add-wrapper {
+                display: flex;
+            justify-content: center;
+            }
             /* Cart Sidebar */
             .cart-sidebar {
                 position: fixed;
@@ -156,8 +162,44 @@
             .cart-sidebar:hover {
                 right: 0;
             }
+            /* Create Product*/
+            .create-acc-fields {
+                background-color: var(--teal);
+                border: 1px solid var(--slate-blue);
+                width: 30%;
+                border-radius: 8px;
+                padding: 16px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                text-align: center;
+                margin: 0 auto;
+            }
 
+            .create-acc-style {
+                padding: 10px;
+                margin: 5px;
+                background-color: white;
+                border: black 1px solid;
+                border-radius: 2px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                font-family: 'Montserrat', sans-serif;
+            }
 
+            .create-acc-fields button {
+                display: inline-block;
+                background-color: var(--orange);
+                color: var(--cream);
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+                text-decoration: none;
+                font-weight: bold;
+                margin-top: 8px;                
+            }
+
+            .create-acc-fields button:hover {
+                background-color: var(--yellow);
+                color: var(--deep-purple)
+            }
             /* Footer */
             footer {
                 position: fixed;
@@ -191,6 +233,14 @@
             <div class = 'banner'>
                 <h1>Manage Products</h1>
             </div>
+
+            <form class = 'create-acc-fields'>
+                <h2 style = 'text-align: center;'> Create New Product</h2>
+                <input type = 'text' placeholder = 'Item Name' class = 'create-acc-style'> <br>
+                <input type = 'number' placeholder = 'Price ($)' class = 'create-acc-style'> <br>
+                <input type = 'number' placeholder = 'Count' class = 'create-acc-style'> <br>
+                <button type="submit">Create Account</button>
+            </form>
 
             <!-- Grid of Products (Product Categories) -->
             <div class = 'product-grid'>
