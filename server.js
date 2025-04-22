@@ -32,6 +32,10 @@ async function deleteOneProduct(product) {
     return result
 }
 
+app.get('/', function(req, res) {
+    res.sendFile(path.join(rootFolder, 'index.html'))  
+})
+
 app.get('/home', function(req, res){
     res.sendFile(path.join(rootFolder, 'index.html'))
 })
@@ -55,12 +59,12 @@ app.get('/get_products', function(req, res){
 })
 
 app.post('/add_product', express.json(),function(req, res) {
-    var product = {name:req.body.name, price:req.body.price}
+    var product = {name:req.body.name, price:req.body.price, stock:req.body.stock}
     res.send(insertOneProduct(product)) 
 })
 
 app.post('/delete_product', express.json(),function(req, res) {
-    var product = {name:req.body.name, price:req.body.price}
+    var product = {name:req.body.name}
     res.send(deleteOneProduct(product))
 })
 
@@ -75,6 +79,11 @@ app.get('/create_account', function(req, res){
 app.get('/about', function(req, res){
     res.sendFile(path.join(rootFolder, 'about.html'))
 })
+
+app.get('/manage_products', function(req, res){
+    res.sendFile(path.join(rootFolder, 'product_manage.html'))
+})
+
 app.listen(3000, function(){
     console.log('Server Running at localhost:3000')
 })

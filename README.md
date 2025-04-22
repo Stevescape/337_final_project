@@ -8,3 +8,4 @@ https://stackoverflow.com/questions/2727717/how-to-remove-the-parent-element-usi
 https://www.w3schools.com/jsref/prop_element_classlist.asp
 https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
 https://stackoverflow.com/questions/8510008/express-js-shutdown-hook
+https://stackoverflow.com/questions/34057595/allow-2-decimal-places-in-input-type-number
