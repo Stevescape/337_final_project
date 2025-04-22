@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const app = express();
 
-const rootFolder = path.join(__dirname, 'public');
+const rootFolder = path.join(__dirname, 'public/');
 
 app.get('/home', function(req, res){
     res.sendFile(path.join(rootFolder, 'index.html'))
