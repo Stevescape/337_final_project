@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> [Placeholder Name] | Login</title> 
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --orange: #FF8811;
+                --yellow: #F4D06F;
+                --cream: #FFF8F0;
+                --teal: #9DD9D2;
+                --deep-purple: #392F5A;
+                --rich-purple: #3D315B;
+                --slate-blue: #444B6E;
+            }
+
+            body {
+                margin: 0;
+                font-family: 'Montserrat', sans-serif;
+                background-color: var(--cream);
+                color: var(--deep-purple);
+            }
+
+            header {
+                background-color: var(--slate-blue);
+                color: var(--cream);
+                padding: 16px 32px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav a {
+                font-size: 14px;
+                color: var(--cream);
+                text-decoration: none;
+                margin-left: 16px;
+                font-weight: bold;
+            }
+
+            /* Login Fields */ 
+            .create-acc-fields {
+                background-color: var(--teal);
+                border: 1px solid var(--slate-blue);
+                width: 30%;
+                border-radius: 8px;
+                padding: 16px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            .create-acc-style {
+                padding: 10px;
+                margin: 5px;
+                background-color: white;
+                border: black 1px solid;
+                border-radius: 2px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+                font-family: 'Montserrat', sans-serif;
+            }
+
+            .create-acc-fields button {
+                display: inline-block;
+                background-color: var(--orange);
+                color: var(--cream);
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+                text-decoration: none;
+                font-weight: bold;
+                margin-top: 8px;                
+            }
+
+            .create-acc-fields button:hover {
+                background-color: var(--yellow);
+                color: var(--deep-purple)
+            }
+
+            /* Footer */
+            footer {
+                position: fixed;
+                bottom: 0px;
+                width: 100%;
+                background-color: var(--deep-purple);
+                color: var(--cream);
+                text-align: center;
+                padding: 16px;
+                margin-top: 32px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header & Nav Bar -->
+        <header>
+            <h1> [Placeholder Name]</h1>
+            <nav>
+                <a href = "home">Home</a>
+                <a href = "products">Products</a>
+                <a href = "login">Login</a>
+                <a href = "create_account">Create Account</a>
+                <a href = "create_admin">Create Manager Account</a>
+                <a href = "manage_products">Manage Products</a>
+                <a href = "about">About Us</a>
+            </nav>
+        </header>
+        <h1 style = 'text-align: center;'> Create Admin Account </h1>
+        <form class = 'create-acc-fields'>
+            <input type = 'text' placeholder = 'Full Name' class = 'create-acc-style'> <br>
+            <input type = 'email' placeholder = 'Email' class = 'create-acc-style'> <br>
+            <input type = 'text' placeholder = 'Password' class = 'create-acc-style'> <br>
+            <input type = 'text' placeholder = 'Address' class = 'create-acc-style'> <br>
+            <button type="submit">Create Account</button>
+        </form>
+
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 [Placeholder name]</p>
+        </footer>
+    </body>
+</html>
