@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const app = express();
 const {MongoClient} = require("mongodb")
-const db_url = "mongodb+srv://Cluster09012:csc337_final@cluster09012.jcfnzs9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster09012"
+const db_url = "temp"
 var client = new MongoClient(db_url)
 client.connect()
 
