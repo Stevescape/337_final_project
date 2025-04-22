@@ -31,14 +31,15 @@
             }
 
             nav a {
+                font-size: 14px;
                 color: var(--cream);
                 text-decoration: none;
                 margin-left: 16px;
                 font-weight: bold;
             }
-            
+
             /* Login Fields */ 
-            .login-fields {
+            .create-acc-fields {
                 background-color: var(--teal);
                 border: 1px solid var(--slate-blue);
                 width: 30%;
@@ -49,7 +50,7 @@
                 margin: 0 auto;
             }
 
-            .login-fields-style {
+            .create-acc-style {
                 padding: 10px;
                 margin: 5px;
                 background-color: white;
@@ -59,7 +60,7 @@
                 font-family: 'Montserrat', sans-serif;
             }
 
-            .login-fields button {
+            .create-acc-fields button {
                 display: inline-block;
                 background-color: var(--orange);
                 color: var(--cream);
@@ -71,7 +72,7 @@
                 margin-top: 8px;                
             }
 
-            .login-fields button:hover {
+            .create-acc-fields button:hover {
                 background-color: var(--yellow);
                 color: var(--deep-purple)
             }
@@ -98,17 +99,20 @@
                 <a href = "products">Products</a>
                 <a href = "login">Login</a>
                 <a href = "create_account">Create Account</a>
+                <a href = "create_admin">Create Manager Account</a>
+                <a href = "manage_products">Manage Products</a>
                 <a href = "about">About Us</a>
             </nav>
         </header>
-
-        <!-- Login Fields -->
-        <h1 style = 'text-align: center;'> Login </h1>
-        <form class = 'login-fields'>
-            <input type = 'email' placeholder = 'Email' class = 'login-fields-style'> <br>
-            <input type = 'text' placeholder = 'Password' class = 'login-fields-style'> <br>
-            <button type="submit">Sign In</button>
+        <h1 style = 'text-align: center;'> Create Admin Account </h1>
+        <form class = 'create-acc-fields'>
+            <input type = 'text' placeholder = 'Full Name' class = 'create-acc-style'> <br>
+            <input type = 'email' placeholder = 'Email' class = 'create-acc-style'> <br>
+            <input type = 'text' placeholder = 'Password' class = 'create-acc-style'> <br>
+            <input type = 'text' placeholder = 'Address' class = 'create-acc-style'> <br>
+            <button type="submit">Create Account</button>
         </form>
+
 
         <!-- Footer -->
         <footer>

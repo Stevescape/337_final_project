@@ -41,6 +41,7 @@
             }
 
             nav a {
+                font-size: 14px;
                 color: var(--cream);
                 text-decoration: none;
                 margin-left: 16px;
@@ -50,13 +51,18 @@
             /* Banner */
             .banner {
                 background-color: var(--teal);
-                padding: 12px 8px;
+                padding: 48px 32px;
                 text-align: center;
             }
             
             .banner h1 {
-                font-size: 32px;
-                margin-bottom: 12px;
+                font-size: 40px;
+                margin-bottom: 8px;
+            }
+
+            .banner p {
+                font-size: 24px;
+                color: var(--rich-purple);
             }
             
             /* Product Category Grid */
@@ -70,7 +76,7 @@
             }
 
             .product-type {
-                background-color: white;
+                background-color: var(--cream);
                 border: 1px solid var(--slate-blue);
                 border-radius: 8px;
                 padding: 16px;
@@ -82,12 +88,8 @@
                 margin: 12px 0 5px;
             }
 
-            .product-type h4 {
-                display: inline;
-            }
-
             .btn {
-                
+                display: inline-block;
                 background-color: var(--orange);
                 color: var(--cream);
                 padding: 8px 16px;
@@ -169,27 +171,26 @@
                 margin-top: 32px;
             }
         </style>
-        <script src="products.js"></script>
     </head>
-    <body onload="load_products()">
+    <body>
         <div class = "page-wrapper">
             <!-- Header & Nav Bar -->
             <header>
                 <h1> [Placeholder Name]</h1>
-                <button onclick="add_product({name:'Pencils', price:12.99})">TEST: add product</button>
-                <button onclick="delete_product({name:'Pencils', price:12.99})">TEST: delete product</button>
                 <nav>
                     <a href = "home">Home</a>
                     <a href = "products">Products</a>
                     <a href = "login">Login</a>
                     <a href = "create_account">Create Account</a>
+                    <a href = "create_admin">Create Manager Account</a>
+                    <a href = "manage_products">Manage Products</a>
                     <a href = "about">About Us</a>
                 </nav>
             </header>
-
-            <!-- Store Banner -->
+            <!-- Welcome Banner -->
             <div class = 'banner'>
-                <h1>Store</h1>
+                <h1>Welcome to [Placeholder Name]</h1>
+                <p>Your place for all your art supply needs!</p>
             </div>
 
             <!-- Grid of Products (Product Categories) -->
@@ -198,9 +199,15 @@
                     <h3>[Placeholder]</h3>
                     <a href = '#' class = "btn">View</a>
                 </div>
-                    
-                    <button class = "btn">Add to Cart</button> 
-                    
+
+                <div class = 'product-type'> 
+                    <h3>[Placeholder]</h3>
+                    <a href = '#' class = "btn">View</a>
+                </div>
+
+                <div class = 'product-type'> 
+                    <h3>[Placeholder]</h3>
+                    <a href = '#' class = "btn">View</a>
                 </div>
             </div>
 

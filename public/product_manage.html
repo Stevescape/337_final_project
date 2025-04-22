@@ -41,6 +41,7 @@
             }
 
             nav a {
+                font-size: 14px;
                 color: var(--cream);
                 text-decoration: none;
                 margin-left: 16px;
@@ -58,7 +59,7 @@
                 font-size: 32px;
                 margin-bottom: 12px;
             }
-            
+
             /* Product Category Grid */
             .product-grid {
                 display: grid;
@@ -70,7 +71,7 @@
             }
 
             .product-type {
-                background-color: white;
+                background-color: var(--cream);
                 border: 1px solid var(--slate-blue);
                 border-radius: 8px;
                 padding: 16px;
@@ -169,38 +170,34 @@
                 margin-top: 32px;
             }
         </style>
-        <script src="products.js"></script>
     </head>
-    <body onload="load_products()">
+    <body>
         <div class = "page-wrapper">
             <!-- Header & Nav Bar -->
             <header>
                 <h1> [Placeholder Name]</h1>
-                <button onclick="add_product({name:'Pencils', price:12.99})">TEST: add product</button>
-                <button onclick="delete_product({name:'Pencils', price:12.99})">TEST: delete product</button>
                 <nav>
                     <a href = "home">Home</a>
                     <a href = "products">Products</a>
                     <a href = "login">Login</a>
                     <a href = "create_account">Create Account</a>
+                    <a href = "create_admin">Create Manager Account</a>
+                    <a href = "manage_products">Manage Products</a>
                     <a href = "about">About Us</a>
                 </nav>
             </header>
 
             <!-- Store Banner -->
             <div class = 'banner'>
-                <h1>Store</h1>
+                <h1>Manage Products</h1>
             </div>
 
             <!-- Grid of Products (Product Categories) -->
             <div class = 'product-grid'>
                 <div class = 'product-type'> 
                     <h3>[Placeholder]</h3>
-                    <a href = '#' class = "btn">View</a>
-                </div>
                     
-                    <button class = "btn">Add to Cart</button> 
-                    
+                    <button class = "btn">Remove Item</button> 
                 </div>
             </div>
 

@@ -7,7 +7,7 @@ const db_url = "mongodb+srv://Cluster09012:csc337_final@cluster09012.jcfnzs9.mon
 var client = new MongoClient(db_url)
 client.connect()
 
-const rootFolder = path.join(__dirname, 'public');
+const rootFolder = path.join(__dirname, 'public/');
 
 async function insertOneProduct(product) {
     var col = client.db("store").collection("products")
