@@ -36,7 +36,7 @@ client.connect()
 // deleteClient({email : 'admin@place'})
 
 const rootFolder = path.join(__dirname, 'public/');
-
+app.use(express.static('public'));
 async function insertOneProduct(product) {
     var col = client.db("store").collection("products")
     await col.insertOne(product)
