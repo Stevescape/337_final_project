@@ -15,6 +15,26 @@ if (db_url.startsWith('"') && db_url.endsWith('"')) {
 var client = new MongoClient(db_url)
 client.connect()
 
+// Temp code to add admin acc, Password: pass123
+// var hashedPass = crypto.createHash('sha256').update('pass123').digest('hex')
+// var newUser = {'email' : 'admin@place', 
+//     'password' : hashedPass, 
+//     'fullname' : 'Admin One', 
+//     'address' : 'placeholder',
+//     'acc_type' : 'admin'}
+// insertUserCreate(newUser)
+
+// async function deleteClient(search){
+//     var col = client.db('store').collection('users')
+//     await col.deleteOne(search)
+//     var result = col.find({})
+//     result = await result.toArray()
+//     console.log(result)
+//     return result
+// }
+
+// deleteClient({email : 'admin@place'})
+
 const rootFolder = path.join(__dirname, 'public/');
 
 async function insertOneProduct(product) {
