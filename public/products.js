@@ -28,7 +28,7 @@ async function load_products(btn_text) {
         var button = document.createElement("button")
         button.classList.add("btn")
         if (btn_text == "Add to Cart") {
-            button.onclick = () => {}
+            button.onclick = () => {addToCart(products[i]["name"], 1)}
         } else if (btn_text == "Remove Item") {
             button.onclick = () => {delete_product({"name":products[i]["name"]})}
         }
@@ -42,7 +42,7 @@ async function load_products(btn_text) {
 function add_product() {
     var name = document.getElementsByName("name")[0].value
     var price = document.getElementsByName("price")[0].value
-    var stock = document.getElementsByName("stock")[0].value
+    var stock = parseInt(document.getElementsByName("stock")[0].value)
     var product = {"name":name, "price":price, "stock":stock}
     fetch("http://localhost:3000/add_product", {
         headers:{"Content-Type":"application/json"},

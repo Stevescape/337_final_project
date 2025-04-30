@@ -1,4 +1,4 @@
-window.onload = function() {
+function loadCart() {
     fetch('/get_cart')
     .then(response => response.json())
     .then(cartItems => {
@@ -22,7 +22,7 @@ function displayCartItems(items) {
     for (var i = 0; i < items.length; i++) {
         var item = items[i]
 
-        var div = document.createElement('div')
+        var div = document.createElement('p')
         div.className = 'cart-item'
 
         div.innerHTML = item.name + ' x ' + item.quantity
@@ -62,7 +62,11 @@ function checkoutCart() {
             displayCartItems([])
         } else {
             alert('Order failed: ' + result.message)
+            loadCart()
         }
+    })
+    .then(() => {
+        load_products("Add to Cart")
     })
     .catch(err => {
         console.error('Checkout error:', err)
@@ -70,7 +74,7 @@ function checkoutCart() {
 }
 
 window.addEventListener("DOMContentLoaded", function() {
-    var checkoutBtn = document.querySelector('.btn')
+    var checkoutBtn = document.querySelector('#checkout_btn')
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function(e) {
             e.preventDefault()
@@ -78,3 +82,5 @@ window.addEventListener("DOMContentLoaded", function() {
         })
     }
 })
+
+window.onload = loadCart()

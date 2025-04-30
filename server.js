@@ -109,7 +109,7 @@ function checkAdmin(user) {
 }
 
 // Saving current session user 
-var currentUser = {'acc_type' : 'customer'};
+var currentUser = {'email' : 'guest', 'acc_type' : 'customer'};
 
 
 app.get(['/home', '/'], function(req, res){
@@ -168,6 +168,10 @@ app.get('/create_account', function(req, res){
     res.sendFile(path.join(rootFolder, 'create_account.html'))
 })
 
+app.get("/cart.js", function(req, res) {
+    res.sendFile(path.join(rootFolder, "cart.js"))
+})
+
 app.post('/create_action', express.urlencoded({'extended':true}), function(req, res){
     var hashedPass = crypto.createHash('sha256').update(req.body.password).digest('hex')
     var newUser = {'email' : req.body.email, 
@@ -189,6 +193,10 @@ app.post('/add_to_cart', express.json(), async function(req, res) {
 
     var col = client.db("store").collection("cart")
     var userEmail = currentUser.email
+    if (userEmail == 'guest') {
+        console.log(userEmail)
+        return;
+    }
 
     var result = await col.findOne({ email: userEmail })
 
@@ -253,7 +261,8 @@ app.post('/checkout', async function(req, res) {
         let product = await productCol.findOne({ name: item.name })
 
         if (!product || product.stock < item.quantity) {
-            res.send({ success: false, message: `Not enough stock for ${item.name}` })
+            await cartCol.deleteOne({ email: userEmail})
+            res.send({ success: false, message: `Not enough stock for ${item.name}, clearing cart.`})
             return
         }
     }
@@ -264,6 +273,11 @@ app.post('/checkout', async function(req, res) {
             { name: item.name },
             { $inc: { stock: -item.quantity } }
         )
+        // Check if stock is 0, if so delete it
+        let result = await productCol.findOne({name: item.name})
+        if (result.stock <= 0) {
+            await deleteOneProduct(result)
+        }
     }
 
     var newOrder = {
