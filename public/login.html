@@ -104,10 +104,10 @@
 
         <!-- Login Fields -->
         <h1 style = 'text-align: center;'> Login </h1>
-        <form class = 'login-fields'>
-            <input type = 'email' placeholder = 'Email' class = 'login-fields-style'> <br>
-            <input type = 'text' placeholder = 'Password' class = 'login-fields-style'> <br>
-            <button type="submit">Sign In</button>
+        <form class = 'login-fields' method = 'POST' action = 'login_action'>
+            <input type = 'email' placeholder = 'Email' class = 'login-fields-style' name = 'email'> <br>
+            <input type = 'text' placeholder = 'Password' class = 'login-fields-style' name = 'password'> <br>
+            <button type="submit" value = "Submit" onclick = "storeUser()">Sign In</button>
         </form>
 
         <!-- Footer -->

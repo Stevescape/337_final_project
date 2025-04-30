@@ -1,9 +1,17 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const crypto = require('crypto')
 const app = express();
 const {MongoClient} = require("mongodb")
-const db_url = process.env.API_KEY
+
+// Set Environment Key
+var db_url = process.env.API_KEY
+if (db_url.startsWith('"') && db_url.endsWith('"')) {
+    db_url = db_url.slice(1, -1); 
+}
+// console.log('API_Key from env: ', process.env.API_KEY)
+
 var client = new MongoClient(db_url)
 client.connect()
 
@@ -32,12 +40,66 @@ async function deleteOneProduct(product) {
     return result
 }
 
-app.get('/', function(req, res) {
-    res.sendFile(path.join(rootFolder, 'index.html'))  
-})
+// JS Code for Create Acc & Login
+async function insertUserCreate(user) {
+    var col = client.db('store').collection('users')
+    await col.insertOne(user)
+    var result = col.find({})
+    result = await result.toArray()
+    console.log(result)
+    return result
+} 
 
-app.get('/home', function(req, res){
-    res.sendFile(path.join(rootFolder, 'index.html'))
+async function checkLogin(email, password) {
+    console.log('Check Login')
+    
+    var col = client.db('store').collection('users')
+    var result = col.find({'email' : email})
+    result = await result.toArray()
+    console.log(result)
+
+    for (let i = 0; i < result.length; i++) {
+        var user = result[i]
+        console.log(user)
+        var hashedPass = crypto.createHash('sha256').update(password).digest('hex')
+        console.log(user.email == email + ' | ' + user.password == hashedPass)
+        if((user.email == email) && (user.password == hashedPass)) {
+            currentUser = result[i]
+            return true
+        }
+    }
+    return false
+}
+
+async function getAllUsers() {
+    var col = client.db('store').collection('users')
+    var result = col.find()
+    result = await result.toArray();
+    console.log(result)
+}
+
+getAllUsers();
+
+function checkAdmin(user) {
+    console.log(user)
+    if(user.acc_type == 'admin') {
+        return true
+    }
+    return false;
+}
+
+// Saving current session user 
+var currentUser = {'acc_type' : 'customer'};
+
+
+app.get(['/home', '/'], function(req, res){
+    console.log('Used checkAdmin get')
+    if (checkAdmin(currentUser)) {
+        res.sendFile(path.join(rootFolder, 'index_admin.html'))
+    }
+    else {
+        res.sendFile(path.join(rootFolder, 'index.html'))
+    }
 })
 
 app.get('/products', function(req, res){
@@ -72,8 +134,30 @@ app.get('/login', function(req, res){
     res.sendFile(path.join(rootFolder, 'login.html'))
 })
 
+app.post('/login_action', express.urlencoded({'extended' : true}), async function (req, res){
+    const success = await checkLogin(req.body.email, req.body.password)
+    if(success){
+        res.sendFile(path.join(rootFolder, 'login_action.html'))
+    }
+    else {
+        res.sendFile(path.join(rootFolder, 'login_fail.html'))
+    }
+})
+
 app.get('/create_account', function(req, res){
     res.sendFile(path.join(rootFolder, 'create_account.html'))
+})
+
+app.post('/create_action', express.urlencoded({'extended':true}), function(req, res){
+    var hashedPass = crypto.createHash('sha256').update(req.body.password).digest('hex')
+    var newUser = {'email' : req.body.email, 
+                    'password' : hashedPass, 
+                    'fullname' : req.body.fullname, 
+                    'address' : req.body.address,
+                    'acc_type' : 'customer'}
+    insertUserCreate(newUser)
+
+    res.sendFile(path.join(rootFolder, 'create_customer_action.html'))
 })
 
 app.get('/about', function(req, res){

@@ -102,12 +102,12 @@
             </nav>
         </header>
         <h1 style = 'text-align: center;'> Create Account </h1>
-        <form class = 'create-acc-fields'>
-            <input type = 'text' placeholder = 'Full Name' class = 'create-acc-style'> <br>
-            <input type = 'email' placeholder = 'Email' class = 'create-acc-style'> <br>
-            <input type = 'text' placeholder = 'Password' class = 'create-acc-style'> <br>
-            <input type = 'text' placeholder = 'Address' class = 'create-acc-style'> <br>
-            <button type="submit">Create Account</button>
+        <form class = 'create-acc-fields' method = "POST" action = 'create_action'>
+            <input type = 'email' placeholder = 'Email' class = 'create-acc-style' name = 'email'> <br>
+            <input type = 'text' placeholder = 'Password' class = 'create-acc-style' name = 'password'> <br>
+            <input type = 'text' placeholder = 'Full Name' class = 'create-acc-style' name = 'fullname'> <br>
+            <input type = 'text' placeholder = 'Address' class = 'create-acc-style' name = 'address'> <br>
+            <button type="submit" value = "Submit">Create Account</button>
         </form>
 
 
