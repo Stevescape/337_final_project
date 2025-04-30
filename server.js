@@ -180,6 +180,103 @@ app.post('/create_action', express.urlencoded({'extended':true}), function(req, 
     res.sendFile(path.join(rootFolder, 'create_customer_action.html'))
 })
 
+//Shopping Cart Module
+app.post('/add_to_cart', express.json(), async function(req, res) {
+    var cartItem = {
+        name: req.body.name,
+        quantity: req.body.quantity
+    }
+
+    var col = client.db("store").collection("cart")
+    var userEmail = currentUser.email
+
+    var result = await col.findOne({ email: userEmail })
+
+    if (result) {
+        var existingItems = result.items || []
+        var itemFound = false
+
+        for (let i = 0; i < existingItems.length; i++) {
+            if (existingItems[i].name === cartItem.name) {
+                existingItems[i].quantity += cartItem.quantity
+                itemFound = true
+                break
+            }
+        }
+
+        if (!itemFound) {
+            existingItems.push(cartItem)
+        }
+
+        await col.updateOne(
+            { email: userEmail },
+            { $set: { items: existingItems } }
+        )
+    } else {
+        var newCart = {
+            email: userEmail,
+            items: [cartItem]
+        }
+        await col.insertOne(newCart)
+    }
+
+    res.send("Item added")
+})
+
+app.get('/get_cart', async function(req, res) {
+    var col = client.db("store").collection("cart")
+    var result = await col.findOne({ email: currentUser.email })
+
+    if (result) {
+        res.send(result.items)
+    } else {
+        res.send([])
+    }
+})
+
+// Checkout: confirm stock, create order, update inventory, clear cart
+app.post('/checkout', async function(req, res) {
+    var cartCol = client.db("store").collection("cart")
+    var productCol = client.db("store").collection("products")
+    var orderCol = client.db("store").collection("orders")
+
+    var userEmail = currentUser.email
+    var cart = await cartCol.findOne({ email: userEmail })
+
+    if (!cart || cart.items.length === 0) {
+        res.send({ success: false, message: "Cart is empty" })
+        return
+    }
+
+    for (let i = 0; i < cart.items.length; i++) {
+        let item = cart.items[i]
+        let product = await productCol.findOne({ name: item.name })
+
+        if (!product || product.stock < item.quantity) {
+            res.send({ success: false, message: `Not enough stock for ${item.name}` })
+            return
+        }
+    }
+
+    for (let i = 0; i < cart.items.length; i++) {
+        let item = cart.items[i]
+        await productCol.updateOne(
+            { name: item.name },
+            { $inc: { stock: -item.quantity } }
+        )
+    }
+
+    var newOrder = {
+        email: userEmail,
+        items: cart.items,
+        timestamp: new Date()
+    }
+    await orderCol.insertOne(newOrder)
+    await cartCol.deleteOne({ email: userEmail })
+
+    res.send({ success: true })
+})
+
 app.get('/about', function(req, res){
     res.sendFile(path.join(rootFolder, 'about.html'))
 })
