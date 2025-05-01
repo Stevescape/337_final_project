@@ -242,7 +242,7 @@ app.get('/get_cart', async function(req, res) {
     }
 })
 
-// Checkout: confirm stock, create order, update inventory, clear cart
+// Checkout: confirm stock, create order, update inventory
 app.post('/checkout', async function(req, res) {
     var cartCol = client.db("store").collection("cart")
     var productCol = client.db("store").collection("products")
@@ -289,6 +289,19 @@ app.post('/checkout', async function(req, res) {
     await cartCol.deleteOne({ email: userEmail })
 
     res.send({ success: true })
+})
+
+// Clear user's cart
+app.post('/clear_cart', async function(req, res) {
+    var cartCol = client.db("store").collection("cart")
+    var userEmail = currentUser.email
+    if (userEmail == 'guest') {
+        console.log(userEmail)
+        return;
+    }
+    
+    await cartCol.deleteOne({ email: userEmail })
+    res.send({ success: true, message: "Cart cleared" })
 })
 
 app.get('/about', function(req, res){
