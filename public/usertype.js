@@ -1,10 +1,10 @@
 window.addEventListener('DOMContentLoaded', () => {
     fetch('/user-type')
-      .then(res => res.json())
-      .then(data => {
+    .then(res => res.json())
+    .then(data => {
         const navbar = document.getElementById('navbar');
         if (data.userType === 'admin') {
-          navbar.innerHTML = `
+            navbar.innerHTML = `
             <a href = "home">Home</a>
             <a href = "products">Products</a>
             <a href = "login">Login</a>
@@ -14,16 +14,16 @@ window.addEventListener('DOMContentLoaded', () => {
             <a href = "about">About Us</a>`
         }
         else {
-          navbar.innerHTML = `
+            navbar.innerHTML = `
             <a href = "home">Home</a>
             <a href = "products">Products</a>
             <a href = "login">Login</a>
             <a href = "create_account">Create Account</a>
             <a href = "about">About Us</a>`
         }
-      })
-      .catch(err => {
+    })
+    .catch(err => {
         console.error('Failed to load user type:', err);
-      });
-  });
+    });
+});
   
