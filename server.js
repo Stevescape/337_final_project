@@ -100,15 +100,16 @@ async function getAllUsers() {
 
 getAllUsers();
 
-function checkAdmin(user) {
-    console.log(user)
-    if(user.acc_type == 'admin') {
-        return true
+function checkAdmin(req, res, next) {
+    if (currentUser.acc_type == 'admin'){
+        next();
     }
-    return false;
+    else {
+        res.status(404).sendFile(path.join(rootFolder, '404.html'));
+    }
 }
 
-// Saving current session user 
+// Saving current user 
 var currentUser = {'email' : 'guest', 'acc_type' : 'customer'};
 
 app.get('/user-type', function(req, res){
@@ -173,22 +174,6 @@ app.post('/create_action', express.urlencoded({'extended':true}), function(req, 
                     'fullname' : req.body.fullname, 
                     'address' : req.body.address,
                     'acc_type' : 'customer'}
-    insertUserCreate(newUser)
-
-    res.sendFile(path.join(rootFolder, 'create_customer_action.html'))
-})
-
-app.get('/create_admin', function(req, res){
-    res.sendFile(path.join(rootFolder, 'create_account_admin.html'))
-})
-
-app.post('/create_action_admin', express.urlencoded({'extended':true}), function(req, res){
-    var hashedPass = crypto.createHash('sha256').update(req.body.password).digest('hex')
-    var newUser = {'email' : req.body.email, 
-                    'password' : hashedPass, 
-                    'fullname' : req.body.fullname, 
-                    'address' : req.body.address,
-                    'acc_type' : 'admin'}
     insertUserCreate(newUser)
 
     res.sendFile(path.join(rootFolder, 'create_customer_action.html'))
@@ -322,9 +307,30 @@ app.get('/about', function(req, res){
     res.sendFile(path.join(rootFolder, 'about.html'))
 })
 
-app.get('/manage_products', function(req, res){
+app.get('/manage_products', checkAdmin, function(req, res){
     res.sendFile(path.join(rootFolder, 'product_manage.html'))
 })
+
+// page requests for admin pages
+app.get('/create_admin', checkAdmin, function(req, res){
+    res.sendFile(path.join(rootFolder, 'create_account_admin.html'))
+})
+
+app.post('/create_action_admin', checkAdmin, express.urlencoded({'extended':true}), function(req, res){
+    var hashedPass = crypto.createHash('sha256').update(req.body.password).digest('hex')
+    var newUser = {'email' : req.body.email, 
+                    'password' : hashedPass, 
+                    'fullname' : req.body.fullname, 
+                    'address' : req.body.address,
+                    'acc_type' : 'admin'}
+    insertUserCreate(newUser)
+
+    res.sendFile(path.join(rootFolder, 'create_customer_action.html'))
+})
+
+app.use(function(req, res) {
+    res.status(404).sendFile(path.join(rootFolder, '404.html'));
+});
 
 app.listen(3000, function(){
     console.log('Server Running at localhost:3000')
