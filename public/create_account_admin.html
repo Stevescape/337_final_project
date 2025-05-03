@@ -95,23 +95,18 @@
         <!-- Header & Nav Bar -->
         <header>
             <h1> Arizona Artstore</h1>
-            <nav>
-                <a href = "home">Home</a>
-                <a href = "products">Products</a>
-                <a href = "login">Login</a>
-                <a href = "create_account">Create Account</a>
-                <a href = "create_admin">Create Manager Account</a>
-                <a href = "manage_products">Manage Products</a>
-                <a href = "about">About Us</a>
-            </nav>
+            <nav id = 'navbar'></nav> <!-- Change NavBar based on admin vs customer -->
         </header>
+
+        <script src = 'usertype.js'></script>
+
         <h1 style = 'text-align: center;'> Create Admin Account </h1>
-        <form class = 'create-acc-fields'>
-            <input type = 'text' placeholder = 'Full Name' class = 'create-acc-style'> <br>
-            <input type = 'email' placeholder = 'Email' class = 'create-acc-style'> <br>
-            <input type = 'text' placeholder = 'Password' class = 'create-acc-style'> <br>
-            <input type = 'text' placeholder = 'Address' class = 'create-acc-style'> <br>
-            <button type="submit">Create Account</button>
+        <form class = 'create-acc-fields' method = "POST" action = 'create_action_admin'>
+            <input type = 'text' placeholder = 'Full Name' class = 'create-acc-style' name = 'fullname'> <br>
+            <input type = 'email' placeholder = 'Email' class = 'create-acc-style' name = 'email'> <br>
+            <input type = 'text' placeholder = 'Password' class = 'create-acc-style' name = 'password'> <br>
+            <input type = 'text' placeholder = 'Address' class = 'create-acc-style' name = 'address'> <br>
+            <button type="submit" value = "Submit">Create Account</button>
         </form>
 
 

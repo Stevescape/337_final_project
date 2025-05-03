@@ -111,15 +111,13 @@ function checkAdmin(user) {
 // Saving current session user 
 var currentUser = {'email' : 'guest', 'acc_type' : 'customer'};
 
+app.get('/user-type', function(req, res){
+    const userType = currentUser.acc_type // Make it change whenever
+    res.json({ userType });
+})
 
 app.get(['/home', '/'], function(req, res){
-    console.log('Used checkAdmin get')
-    if (checkAdmin(currentUser)) {
-        res.sendFile(path.join(rootFolder, 'index_admin.html'))
-    }
-    else {
-        res.sendFile(path.join(rootFolder, 'index.html'))
-    }
+    res.sendFile(path.join(rootFolder, 'index.html'))
 })
 
 app.get('/products', function(req, res){
@@ -168,10 +166,6 @@ app.get('/create_account', function(req, res){
     res.sendFile(path.join(rootFolder, 'create_account.html'))
 })
 
-app.get("/cart.js", function(req, res) {
-    res.sendFile(path.join(rootFolder, "cart.js"))
-})
-
 app.post('/create_action', express.urlencoded({'extended':true}), function(req, res){
     var hashedPass = crypto.createHash('sha256').update(req.body.password).digest('hex')
     var newUser = {'email' : req.body.email, 
@@ -184,7 +178,27 @@ app.post('/create_action', express.urlencoded({'extended':true}), function(req, 
     res.sendFile(path.join(rootFolder, 'create_customer_action.html'))
 })
 
+app.get('/create_admin', function(req, res){
+    res.sendFile(path.join(rootFolder, 'create_account_admin.html'))
+})
+
+app.post('/create_action_admin', express.urlencoded({'extended':true}), function(req, res){
+    var hashedPass = crypto.createHash('sha256').update(req.body.password).digest('hex')
+    var newUser = {'email' : req.body.email, 
+                    'password' : hashedPass, 
+                    'fullname' : req.body.fullname, 
+                    'address' : req.body.address,
+                    'acc_type' : 'admin'}
+    insertUserCreate(newUser)
+
+    res.sendFile(path.join(rootFolder, 'create_customer_action.html'))
+})
+
 //Shopping Cart Module
+app.get("/cart.js", function(req, res) {
+    res.sendFile(path.join(rootFolder, "cart.js"))
+})
+
 app.post('/add_to_cart', express.json(), async function(req, res) {
     var cartItem = {
         name: req.body.name,
