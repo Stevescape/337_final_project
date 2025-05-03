@@ -12,7 +12,7 @@ function loadCart() {
 // Display cart items in the cart sidebar
 function displayCartItems(items) {
     var container = document.querySelector('.cart-items')
-    container.innerHTML = '' // Clear cart
+    container.innerHTML = ''
 
     if (items.length === 0) {
         container.innerHTML = '<p>Your cart is empty</p>'
@@ -73,12 +73,38 @@ function checkoutCart() {
     })
 }
 
+function clearCart() {
+    fetch('/clear_cart', {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            alert('Cart cleared.')
+            displayCartItems([])
+        } else {
+            alert('Clear cart failed: ' + result.message)
+        }
+    })
+    .catch(err => {
+        console.error('Clear cart error:', err)
+    })
+}
+
 window.addEventListener("DOMContentLoaded", function() {
     var checkoutBtn = document.querySelector('#checkout_btn')
     if (checkoutBtn) {
         checkoutBtn.addEventListener('click', function(e) {
             e.preventDefault()
             checkoutCart()
+        })
+    }
+
+    var clearBtn = document.querySelector('#clear_btn')
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function(e) {
+            e.preventDefault()
+            clearCart()
         })
     }
 })
