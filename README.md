@@ -15,3 +15,14 @@ https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-n
 https://stackoverflow.com/questions/8510008/express-js-shutdown-hook
 https://stackoverflow.com/questions/34057595/allow-2-decimal-places-in-input-type-number
 
+___
+
+# How to run
+
+1. Install packages listed in package.json
+2. Start up mongoDB locally. `mongod`
+3. Run `node server.js`
+4. The default admin acount is 
+<br>Email: `admin@gmail.com` <br>
+Password: `pass123`
+ 
