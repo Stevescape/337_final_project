@@ -7,10 +7,12 @@ const app = express();
 const {MongoClient} = require("mongodb")
 
 // Set Environment Key
-var db_url = process.env.API_KEY
-if (db_url.startsWith('"') && db_url.endsWith('"')) {
-    db_url = db_url.slice(1, -1); 
-}
+// var db_url = process.env.API_KEY
+// if (db_url.startsWith('"') && db_url.endsWith('"')) {
+//     db_url = db_url.slice(1, -1); 
+// }
+
+var db_url = "mongodb://localhost:27017/"
 
 // Set up MongoDB using Environment Key
 var client = new MongoClient(db_url)
@@ -26,6 +28,18 @@ client.connect()
 // }
 
 // deleteClient({email : 'admin@place'})
+
+// Add default admin if it doesn't exist, password: pass123
+async function addDefaultAdmin() {
+    var col = client.db('store').collection('users')
+    var res = await col.findOne({"email": "admin@gmail.com"})
+    if (!res) {
+        console.log("Creating default admin, email is admin@gmail.com and password is pass123")
+        let pass = crypto.createHash('sha256').update("pass123").digest('hex')
+        await col.insertOne({"email": "admin@gmail.com", "password": pass, "acc_type": "admin"})
+    }
+}
+addDefaultAdmin()
 
 // Set up session to pass account information through
 app.use(express.json())
