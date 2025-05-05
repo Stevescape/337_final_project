@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session')
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto')
@@ -10,8 +11,8 @@ var db_url = process.env.API_KEY
 if (db_url.startsWith('"') && db_url.endsWith('"')) {
     db_url = db_url.slice(1, -1); 
 }
-// console.log('API_Key from env: ', process.env.API_KEY)
 
+// Set up MongoDB using Environment Key
 var client = new MongoClient(db_url)
 client.connect()
 
@@ -35,8 +36,21 @@ client.connect()
 
 // deleteClient({email : 'admin@place'})
 
+// Set up session to pass account information through
+app.use(express.json())
+
+app.use(session({
+    secret: 'something key lol',
+    resave: 'false',
+    saveUninitialized: true,
+    cookie: {secure: false}
+}))
+
+// Setting File Path
 const rootFolder = path.join(__dirname, 'public/');
 app.use(express.static('public'));
+
+// Product Management Module
 async function insertOneProduct(product) {
     var col = client.db("store").collection("products")
     await col.insertOne(product)
@@ -60,7 +74,15 @@ async function deleteOneProduct(product) {
     return result
 }
 
-// JS Code for Create Acc & Login
+// Login & Account Creation Module
+app.use(function(req, res, next) {
+    if (!req.session.userInfo) {
+        req.session.userInfo = {acc_type: 'guest', email: 'guest', fullname: 'Guest User'}
+    }
+    next()
+})
+
+
 async function insertUserCreate(user) {
     var col = client.db('store').collection('users')
     await col.insertOne(user)
@@ -70,22 +92,15 @@ async function insertUserCreate(user) {
     return result
 } 
 
-async function checkLogin(email, password) {
-    console.log('Check Login')
-    
+async function getUser(email, password) {
     var col = client.db('store').collection('users')
     var result = col.find({'email' : email})
     result = await result.toArray()
-    console.log(result)
-
     for (let i = 0; i < result.length; i++) {
         var user = result[i]
-        console.log(user)
         var hashedPass = crypto.createHash('sha256').update(password).digest('hex')
-        console.log(user.email == email + ' | ' + user.password == hashedPass)
         if((user.email == email) && (user.password == hashedPass)) {
-            currentUser = result[i]
-            return true
+            return result[i]
         }
     }
     return false
@@ -101,7 +116,7 @@ async function getAllUsers() {
 getAllUsers();
 
 function checkAdmin(req, res, next) {
-    if (currentUser.acc_type == 'admin'){
+    if (req.session.userInfo.acc_type == 'admin'){
         next();
     }
     else {
@@ -110,10 +125,13 @@ function checkAdmin(req, res, next) {
 }
 
 // Saving current user 
-var currentUser = {'email' : 'guest', 'acc_type' : 'customer'};
+var guestUser = {'email' : 'guest', 'acc_type' : 'customer'};
 
 app.get('/user-type', function(req, res){
-    const userType = currentUser.acc_type // Make it change whenever
+    //const userType = currentUser.acc_type // Make it change whenever
+    let userType;
+    if (req.session.userInfo == null) userType = guestUser
+    else userType = req.session.userInfo.acc_type
     res.json({ userType });
 })
 
@@ -154,8 +172,10 @@ app.get('/login', function(req, res){
 })
 
 app.post('/login_action', express.urlencoded({'extended' : true}), async function (req, res){
-    const success = await checkLogin(req.body.email, req.body.password)
-    if(success){
+    //const success = await checkLogin(req.body.email, req.body.password)
+    let user = await getUser(req.body.email, req.body.password)
+    if(user){
+        req.session.userInfo = user
         res.sendFile(path.join(rootFolder, 'login_action.html'))
     }
     else {
@@ -191,7 +211,7 @@ app.post('/add_to_cart', express.json(), async function(req, res) {
     }
 
     var col = client.db("store").collection("cart")
-    var userEmail = currentUser.email
+    var userEmail = req.session.userInfo.email
     if (userEmail == 'guest') {
         console.log(userEmail)
         return;
@@ -232,7 +252,7 @@ app.post('/add_to_cart', express.json(), async function(req, res) {
 
 app.get('/get_cart', async function(req, res) {
     var col = client.db("store").collection("cart")
-    var result = await col.findOne({ email: currentUser.email })
+    var result = await col.findOne({ email: req.session.userInfo.email })
 
     if (result) {
         res.send(result.items)
@@ -247,7 +267,7 @@ app.post('/checkout', async function(req, res) {
     var productCol = client.db("store").collection("products")
     var orderCol = client.db("store").collection("orders")
 
-    var userEmail = currentUser.email
+    var userEmail = req.session.userInfo.email
     var cart = await cartCol.findOne({ email: userEmail })
 
     if (!cart || cart.items.length === 0) {
@@ -293,7 +313,7 @@ app.post('/checkout', async function(req, res) {
 // Clear user's cart
 app.post('/clear_cart', async function(req, res) {
     var cartCol = client.db("store").collection("cart")
-    var userEmail = currentUser.email
+    var userEmail = req.session.userInfo.email
     if (userEmail == 'guest') {
         console.log(userEmail)
         return;
