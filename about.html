@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Arizona Artstore | About </title> 
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --orange: #FF8811;
+                --yellow: #F4D06F;
+                --cream: #FFF8F0;
+                --teal: #9DD9D2;
+                --deep-purple: #392F5A;
+                --rich-purple: #3D315B;
+                --slate-blue: #444B6E;
+            }
+
+            body {
+                margin: 0;
+                height: 100%;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                font-family: 'Montserrat', sans-serif;
+                background-color: var(--cream);
+                color: var(--deep-purple);
+            }
+
+            .page-wrapper {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+            }
+
+            header {
+                background-color: var(--slate-blue);
+                color: var(--cream);
+                padding: 16px 32px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav a {
+                color: var(--cream);
+                text-decoration: none;
+                margin-left: 16px;
+                font-weight: bold;
+            }
+
+            /* Banner */
+            .banner {
+                background-color: var(--teal);
+                padding: 48px 32px;
+                text-align: center;
+            }
+            
+            .banner h1 {
+                font-size: 40px;
+                margin-bottom: 8px;
+            }
+
+            .banner p {
+                font-size: 24px;
+                color: var(--rich-purple);
+            }
+
+            /* Footer */
+            footer {
+                position: fixed;
+                bottom: 0px;
+                width: 100%;
+                background-color: var(--deep-purple);
+                color: var(--cream);
+                text-align: center;
+                padding: 16px;
+                margin-top: 32px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class = "page-wrapper">
+            <!-- Header & Nav Bar -->
+            <header>
+                <h1> Arizona Artstore</h1>
+                <nav id = 'navbar'></nav> <!-- Change NavBar based on admin vs customer -->
+            </header>
+    
+            <script src = 'usertype.js'></script>
+            
+            <!-- Welcome Banner -->
+            <div class = 'banner'>
+                <h1>About Us</h1>
+                <p>Here at Arizona Artstore, you can buy all of your art needs! Whether it be Canvas, Pencils, Paints or other, you can count on us to have it!</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Arizona Artstore</p>
+        </footer>
+    </body>
+</html>

@@ -52,8 +52,8 @@ app.use(session({
 }))
 
 // Setting File Path
-const rootFolder = path.join(__dirname, 'public/');
-app.use(express.static('public'));
+const rootFolder = path.join(__dirname);
+app.use(express.static(rootFolder));
 
 // Product Management Module
 async function insertOneProduct(product) {

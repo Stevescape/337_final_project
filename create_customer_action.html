@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Arizona Artstore | Created Account! </title> 
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            :root {
+                --orange: #FF8811;
+                --yellow: #F4D06F;
+                --cream: #FFF8F0;
+                --teal: #9DD9D2;
+                --deep-purple: #392F5A;
+                --rich-purple: #3D315B;
+                --slate-blue: #444B6E;
+            }
+
+            body {
+                margin: 0;
+                font-family: 'Montserrat', sans-serif;
+                background-color: var(--cream);
+                color: var(--deep-purple);
+            }
+
+            header {
+                background-color: var(--slate-blue);
+                color: var(--cream);
+                padding: 16px 32px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav a {
+                color: var(--cream);
+                text-decoration: none;
+                margin-left: 16px;
+                font-weight: bold;
+            }
+            
+            .btn {
+                text-align: center;
+                background-color: var(--orange);
+                color: var(--cream);
+                padding: 8px 16px;
+                border: none;
+                border-radius: 4px;
+                text-decoration: none;
+                font-weight: bold;
+                margin-top: 8px;
+            }
+
+            .btn:hover {
+                background-color: var(--yellow);
+                color: var(--deep-purple);
+                cursor: pointer;
+            }
+
+            /* Footer */
+            footer {
+                position: fixed;
+                bottom: 0px;
+                width: 100%;
+                background-color: var(--deep-purple);
+                color: var(--cream);
+                text-align: center;
+                padding: 16px;
+                margin-top: 32px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header & Nav Bar -->
+        <header>
+            <h1> Arizona Artstore</h1>
+            <nav id = 'navbar'></nav> <!-- Change NavBar based on admin vs customer -->
+        </header>
+
+        <script src = 'usertype.js'></script>
+
+        <!-- Login Fields -->
+        <h1 style = 'text-align: center;'> Account Successfully Created! </h1>
+        <h2 style = 'text-align: center;'> Please Login</h2>
+        <div style = 'text-align: center'>
+            <a href = "login" class = 'btn'>Go to Login</a>
+        </div>
+
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Arizona Artstore</p>
+        </footer>
+    </body>
+</html>
