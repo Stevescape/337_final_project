@@ -16,15 +16,6 @@ if (db_url.startsWith('"') && db_url.endsWith('"')) {
 var client = new MongoClient(db_url)
 client.connect()
 
-// Temp code to add admin acc, Password: pass123
-// var hashedPass = crypto.createHash('sha256').update('pass123').digest('hex')
-// var newUser = {'email' : 'admin@place', 
-//     'password' : hashedPass, 
-//     'fullname' : 'Admin One', 
-//     'address' : 'placeholder',
-//     'acc_type' : 'admin'}
-// insertUserCreate(newUser)
-
 // async function deleteClient(search){
 //     var col = client.db('store').collection('users')
 //     await col.deleteOne(search)
@@ -76,12 +67,12 @@ async function deleteOneProduct(product) {
 
 // Login & Account Creation Module
 app.use(function(req, res, next) {
+    // Set session userInfo to guest initally
     if (!req.session.userInfo) {
         req.session.userInfo = {acc_type: 'guest', email: 'guest', fullname: 'Guest User'}
     }
     next()
 })
-
 
 async function insertUserCreate(user) {
     var col = client.db('store').collection('users')
@@ -93,6 +84,7 @@ async function insertUserCreate(user) {
 } 
 
 async function getUser(email, password) {
+    // Gets a user using a given email and password. Returns false if not found
     var col = client.db('store').collection('users')
     var result = col.find({'email' : email})
     result = await result.toArray()
@@ -107,15 +99,15 @@ async function getUser(email, password) {
 }
 
 async function getAllUsers() {
+    // Prints all users
     var col = client.db('store').collection('users')
     var result = col.find()
     result = await result.toArray();
     console.log(result)
 }
 
-getAllUsers();
-
 function checkAdmin(req, res, next) {
+    // checks if the session user is an admin or customer, redirects users to 404 page if they try to access admin pages through URL
     if (req.session.userInfo.acc_type == 'admin'){
         next();
     }
@@ -124,17 +116,13 @@ function checkAdmin(req, res, next) {
     }
 }
 
-// Saving current user 
-var guestUser = {'email' : 'guest', 'acc_type' : 'customer'};
-
+// Loads Navigation Bar
 app.get('/user-type', function(req, res){
-    //const userType = currentUser.acc_type // Make it change whenever
-    let userType;
-    if (req.session.userInfo == null) userType = guestUser
-    else userType = req.session.userInfo.acc_type
+    let userType = req.session.userInfo.acc_type
     res.json({ userType });
 })
 
+// Loads All Pages
 app.get(['/home', '/'], function(req, res){
     res.sendFile(path.join(rootFolder, 'index.html'))
 })
@@ -147,6 +135,7 @@ app.get('/products.js', function(req, res) {
     res.sendFile(path.join(rootFolder, 'products.js'))
 })
 
+// Requests for Product Management
 app.get('/get_products', function(req, res){
     DBgetProducts()
     .then((products) => {
@@ -331,7 +320,7 @@ app.get('/manage_products', checkAdmin, function(req, res){
     res.sendFile(path.join(rootFolder, 'product_manage.html'))
 })
 
-// page requests for admin pages
+// Requests for Admin Pages
 app.get('/create_admin', checkAdmin, function(req, res){
     res.sendFile(path.join(rootFolder, 'create_account_admin.html'))
 })
